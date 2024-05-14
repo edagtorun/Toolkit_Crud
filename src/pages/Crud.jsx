@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Stack, Button, Table } from "react-bootstrap";
+import { Container, Stack, Button, Table, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormModal from "../components/FormModal";
 import { deleteTask } from "../redux/slices/crudSlice";
@@ -9,9 +9,9 @@ const Crud = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [editItem, setEditItem] = useState(null);
   const dispatch = useDispatch();
 
-  console.log(tasks);
   return (
     <div>
       <Container>
@@ -45,19 +45,36 @@ const Crud = () => {
                 <td>{task.assigned_to}</td>
                 <td>{task.end_date}</td>
                 <td>
-                  <Button
-                    onClick={() => dispatch(deleteTask(task.id))}
-                    variant="danger"
-                  >
-                    Sil
-                  </Button>
+                  <ButtonGroup size="sm">
+                    <Button
+                      onClick={() => {
+                        setEditItem(task);
+                        setIsOpen(true);
+                      }}
+                    >
+                      Düzenle
+                    </Button>
+                    <Button
+                      onClick={() => dispatch(deleteTask(task.id))}
+                      variant="danger"
+                    >
+                      Sil
+                    </Button>
+                  </ButtonGroup>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
 
-        <FormModal isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+        <FormModal
+          editItem={editItem}
+          isOpen={isOpen}
+          handleClose={() => {
+            setIsOpen(false);
+            setEditItem(null);
+          }}
+        />
       </Container>
     </div>
   );

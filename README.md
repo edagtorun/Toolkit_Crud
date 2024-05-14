@@ -17,6 +17,8 @@ Create the store and reducers.
 
 In Redux Toolkit, a slice is a construct that allows us to define both reducers and actions in a single location.
 
-<h2>Screenshot</h2>
+<h2>Screenshots</h2>
 
-![](Screen-Recording.gif)
+![](Screenshot1.gif)
+
+![](Screeshot2.gif)

@@ -53,6 +53,13 @@ const crudSlice = createSlice({
       //b) elemani sil
       state.tasks.splice(index, 1);
     },
+
+    editTask: (state, action) => {
+      const index = state.tasks.findIndex((i) => i.id === action.payload.id);
+
+      //elemani guncelle
+      state.tasks.splice(index, 1, action.payload);
+    },
   },
 });
 
@@ -62,4 +69,4 @@ export default crudSlice.reducer;
 
 //porjede kullanabilmek icin actionlari export et
 
-export const { addTask, deleteTask } = crudSlice.actions;
+export const { addTask, deleteTask, editTask } = crudSlice.actions;
